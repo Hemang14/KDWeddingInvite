@@ -544,22 +544,33 @@ section { padding: 64px 26px; text-align: center; }
 
 .moments { padding-bottom: 74px; }
 
-.polaroids {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 22px 14px;
-  max-width: 360px;
-  margin: 0 auto;
+.marquee {
+  margin: 8px -26px 0;
+  overflow: hidden;
+  -webkit-mask: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+  mask: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
 }
 
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 20px;
+  padding: 14px 10px 20px;
+  animation: marquee 34s linear infinite;
+}
+
+@keyframes marquee { to { transform: translateX(-50%); } }
+
 .polaroid {
+  flex: 0 0 auto;
+  width: 170px;
   background: #fbf7ee;
   padding: 8px 8px 6px;
   box-shadow: 0 10px 22px rgba(0,0,0,0.4);
   transform: rotate(-2.4deg);
 }
 
-.polaroid:nth-child(even) { transform: rotate(2.2deg) translateY(10px); }
+.polaroid:nth-child(even) { transform: rotate(2.2deg) translateY(8px); }
 
 .polaroid img { width: 100%; aspect-ratio: 4 / 4.6; object-fit: cover; display: block; }
 
@@ -749,6 +760,7 @@ footer { padding: 56px 26px 64px; text-align: center; }
   .reveal { opacity: 1; transform: none; transition: none; }
   #seal { animation: none; }
   .env-inner { animation: none; }
+  .marquee-track { animation: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
