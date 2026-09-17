@@ -98,7 +98,7 @@ body {
 
 .cam {
   position: absolute;
-  bottom: -15vh;
+  bottom: -11vh;
   left: 75%;
   transform: translateX(-40%);
   z-index: 2;
