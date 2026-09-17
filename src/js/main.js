@@ -9,13 +9,13 @@ if (petals && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   for (let i = 0; i < 26; i++) {
     const p = document.createElement('span');
     p.className = 'petal';
-    const size = 7 + Math.random() * 8;
+    const size = 4 + Math.random() * 4;
     p.style.left = Math.random() * 100 + '%';
     p.style.width = size + 'px';
     p.style.height = size + 'px';
     p.style.animationDuration = (7 + Math.random() * 7) + 's';
     p.style.animationDelay = -Math.random() * 12 + 's';
-    p.style.opacity = 0.5 + Math.random() * 0.5;
+    p.style.opacity = 0.3 + Math.random() * 0.4;
     petals.appendChild(p);
   }
 }
