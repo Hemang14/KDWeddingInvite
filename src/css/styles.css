@@ -97,22 +97,22 @@ body {
 
 .cam {
   position: absolute;
-  bottom: 16vh;
+  bottom: 9vh;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
-  width: 122%;
+  width: 134%;
   display: block;
   filter: drop-shadow(0 10px 18px rgba(0,0,0,0.4));
 }
 
 .strip-slot {
   position: absolute;
-  bottom: 24vh;
+  bottom: 18vh;
   left: 50%;
   width: 62%;
   height: 42vh;
-  margin-left: -32%;
+  margin-left: -44%;
   overflow: hidden;
   transform: rotate(-3deg);
   z-index: 1;
