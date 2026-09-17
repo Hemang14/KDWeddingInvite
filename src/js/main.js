@@ -34,13 +34,27 @@ seal.addEventListener('click', () => {
   setTimeout(() => envelope.remove(), 1200);
 });
 
+let musicWanted = false;
+
+seal.addEventListener('click', () => { musicWanted = true; });
+
 musicBtn.addEventListener('click', () => {
   if (audio.paused) {
+    musicWanted = true;
     audio.play();
     musicBtn.classList.remove('paused');
   } else {
+    musicWanted = false;
     audio.pause();
     musicBtn.classList.add('paused');
+  }
+});
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    audio.pause();
+  } else if (musicWanted) {
+    audio.play().catch(() => {});
   }
 });
 
