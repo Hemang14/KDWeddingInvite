@@ -301,6 +301,7 @@ section { padding: 64px 26px; text-align: center; }
   margin-top: 22px;
   font-size: 13px;
   letter-spacing: 0.24em;
+  line-height: 1.9;
   text-transform: uppercase;
   color: var(--gold-soft);
 }
