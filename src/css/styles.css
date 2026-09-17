@@ -40,59 +40,81 @@ body {
 
 #envelope.open { opacity: 0; visibility: hidden; }
 
-.env-inner {
+.env-layout {
   position: relative;
   z-index: 3;
-  padding: 24px 24px 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 430px;
+  padding: 0 16px;
+  animation: fadeUp 1.2s ease-out both;
+}
+
+.env-inner {
+  flex: 1 1 0;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  animation: fadeUp 1.2s ease-out both;
+  text-align: center;
 }
 
 .env-kicker {
   color: var(--gold-soft);
-  font-size: 12px;
-  letter-spacing: 0.4em;
+  font-size: clamp(8px, 2.3vw, 10px);
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .env-names {
   color: var(--cream);
-  font-size: clamp(26px, 7vw, 34px);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  line-height: 1.5;
-  margin-bottom: 42px;
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(34px, 11vw, 46px);
+  letter-spacing: 0.01em;
+  line-height: 1.12;
+  margin-bottom: 32px;
 }
 
 .env-names span {
   display: block;
-  font-family: 'Great Vibes', cursive;
-  text-transform: none;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
   color: var(--gold);
-  font-size: 0.9em;
-  line-height: 1;
+  font-size: 0.42em;
+  letter-spacing: 0.1em;
+  line-height: 1.6;
 }
 
 .print {
-  position: absolute;
-  bottom: -14px;
-  left: -10px;
-  width: min(56vw, 240px);
+  position: relative;
+  flex: 0 0 42%;
+  align-self: stretch;
 }
 
-.cam { position: relative; z-index: 2; width: 100%; display: block; filter: drop-shadow(0 10px 18px rgba(0,0,0,0.4)); }
+.cam {
+  position: absolute;
+  bottom: 16vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: 122%;
+  display: block;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,0.4));
+}
 
 .strip-slot {
   position: absolute;
-  bottom: 135px;
-  left: 18px;
-  width: 84px;
-  height: 270px;
+  bottom: 24vh;
+  left: 50%;
+  width: 62%;
+  height: 42vh;
+  margin-left: -32%;
   overflow: hidden;
-  transform: rotate(-2deg);
+  transform: rotate(-3deg);
   z-index: 1;
 }
 
@@ -100,20 +122,13 @@ body {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 84px;
-  height: 247px;
+  width: 100%;
   box-shadow: 0 4px 14px rgba(0,0,0,0.35);
   transform: translateY(101%);
   animation: printout 3.4s cubic-bezier(0.22, 1, 0.36, 1) 0.9s forwards;
 }
 
 @keyframes printout { to { transform: translateY(0); } }
-
-@media (max-height: 720px) {
-  .print { width: 175px; }
-  .strip-slot { bottom: 110px; left: 26px; width: 84px; height: 268px; }
-  .strip { width: 84px; height: 247px; }
-}
 
 #seal {
   width: 108px;
