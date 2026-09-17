@@ -11,14 +11,18 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; background: var(--cream); }
 
 body {
-  background: var(--wine-deep);
+  background: var(--cream);
   font-family: 'Cormorant Garamond', serif;
   color: var(--ink);
   display: flex;
   justify-content: center;
+}
+
+@media (min-width: 500px) {
+  html, body { background: var(--wine-deep); }
 }
 
 #envelope {
@@ -251,10 +255,10 @@ section { padding: 64px 26px; text-align: center; }
 .invocation { padding-top: 56px; }
 
 .ganesha {
-  width: 84px;
-  height: 84px;
-  object-fit: contain;
-  padding: 12px;
+  width: 92px;
+  height: 92px;
+  object-fit: cover;
+  padding: 3px;
   background: radial-gradient(circle at 40% 30%, #fdf8ec, var(--cream) 70%);
   border: 2px solid var(--gold);
   border-radius: 50%;
