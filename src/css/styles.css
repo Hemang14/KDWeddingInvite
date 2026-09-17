@@ -87,10 +87,10 @@ body {
 
 .strip-slot {
   position: absolute;
-  bottom: 150px;
-  left: 22%;
-  width: 106px;
-  height: min(38vh, 330px);
+  bottom: 135px;
+  left: 18px;
+  width: 84px;
+  height: 270px;
   overflow: hidden;
   transform: rotate(-2deg);
   z-index: 1;
@@ -98,8 +98,10 @@ body {
 
 .strip {
   position: absolute;
-  bottom: -8px;
-  width: 100%;
+  bottom: 0;
+  left: 0;
+  width: 84px;
+  height: 247px;
   box-shadow: 0 4px 14px rgba(0,0,0,0.35);
   transform: translateY(101%);
   animation: printout 3.4s cubic-bezier(0.22, 1, 0.36, 1) 0.9s forwards;
@@ -109,7 +111,8 @@ body {
 
 @media (max-height: 720px) {
   .print { width: 175px; }
-  .strip-slot { bottom: 110px; width: 80px; height: 32vh; }
+  .strip-slot { bottom: 110px; left: 26px; width: 84px; height: 268px; }
+  .strip { width: 84px; height: 247px; }
 }
 
 #seal {
