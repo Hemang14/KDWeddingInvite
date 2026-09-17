@@ -93,11 +93,12 @@ body {
   position: relative;
   flex: 0 0 42%;
   align-self: stretch;
+  pointer-events: none;
 }
 
 .cam {
   position: absolute;
-  bottom: 0vh;
+  bottom: -15vh;
   left: 75%;
   transform: translateX(-40%);
   z-index: 2;
@@ -108,7 +109,7 @@ body {
 
 .strip-slot {
   position: absolute;
-  bottom: 19vh;
+  bottom: 8vh;
   left: 67%;
   width: 62%;
   height: 42vh;
