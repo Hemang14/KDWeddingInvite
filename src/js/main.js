@@ -4,6 +4,22 @@ const seal = document.getElementById('seal');
 const audio = document.getElementById('bg-music');
 const musicBtn = document.getElementById('music-toggle');
 
+const petals = document.getElementById('petals');
+if (petals && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  for (let i = 0; i < 26; i++) {
+    const p = document.createElement('span');
+    p.className = 'petal';
+    const size = 7 + Math.random() * 8;
+    p.style.left = Math.random() * 100 + '%';
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    p.style.animationDuration = (7 + Math.random() * 7) + 's';
+    p.style.animationDelay = -Math.random() * 12 + 's';
+    p.style.opacity = 0.5 + Math.random() * 0.5;
+    petals.appendChild(p);
+  }
+}
+
 if (location.hash === '#open') {
   envelope.remove();
   card.setAttribute('aria-hidden', 'false');
