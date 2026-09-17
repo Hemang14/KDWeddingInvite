@@ -132,11 +132,13 @@ body {
 
 #seal:active { transform: scale(0.92); }
 
-.seal-mono {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 600;
-  font-size: 26px;
-  letter-spacing: 0.12em;
+.seal-logo {
+  width: 66px;
+  height: 66px;
+  object-fit: contain;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: drop-shadow(0 1px 1px rgba(60,40,10,0.35));
 }
 
 .env-hint {
