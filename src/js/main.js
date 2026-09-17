@@ -91,9 +91,12 @@ document.querySelectorAll('section, footer').forEach(sec => {
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => {
-    e.target.classList.toggle('in', e.isIntersecting);
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      observer.unobserve(e.target);
+    }
   });
-}, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+}, { threshold: 0, rootMargin: '0px 0px 10% 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 

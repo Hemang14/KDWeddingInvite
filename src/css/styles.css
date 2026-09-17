@@ -98,7 +98,7 @@ body {
 .cam {
   position: absolute;
   bottom: 0vh;
-  left: 50%;
+  left: 75%;
   transform: translateX(-40%);
   z-index: 2;
   width: 164%;
@@ -109,7 +109,7 @@ body {
 .strip-slot {
   position: absolute;
   bottom: 19vh;
-  left: 42%;
+  left: 67%;
   width: 62%;
   height: 42vh;
   margin-left: -44%;
