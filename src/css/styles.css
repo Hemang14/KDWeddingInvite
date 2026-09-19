@@ -538,7 +538,7 @@ section { position: relative; }
   margin: 0 auto 34px;
   max-width: 340px;
   background: #fffdf8;
-  border: 1px solid rgba(201,163,92,0.5);
+  border: none;
   border-radius: 18px;
   box-shadow: 0 10px 26px rgba(74,18,32,0.14);
   overflow: hidden;
