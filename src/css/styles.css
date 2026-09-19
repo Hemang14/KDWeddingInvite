@@ -235,16 +235,6 @@ section { padding: 64px 26px; text-align: center; }
 
 .wine { background: linear-gradient(175deg, #551627 0%, var(--wine) 55%, #3c0e19 100%); color: var(--cream); }
 
-.wine::before {
-  content: '';
-  position: absolute;
-  inset: 16px;
-  pointer-events: none;
-  border: 1px solid rgba(201,163,92,0.32);
-  outline: 1px solid rgba(201,163,92,0.16);
-  outline-offset: 5px;
-}
-
 section { position: relative; }
 
 @keyframes shimmer { to { background-position: -220% 0; } }
@@ -538,7 +528,7 @@ section { position: relative; }
   margin: 0 auto 34px;
   max-width: 340px;
   background: #fffdf8;
-  border: none;
+  border: 1px solid rgba(201,163,92,0.5);
   border-radius: 18px;
   box-shadow: 0 10px 26px rgba(74,18,32,0.14);
   overflow: hidden;
