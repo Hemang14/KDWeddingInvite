@@ -123,21 +123,31 @@ body {
   z-index: 1;
 }
 
-/* the caption and the photo strip share this wrapper, so they slide out of the camera together */
+/* Print-out: the caption and strip rise out of the camera together.
+   The caption docks at the top of the slot; the strip keeps looping upward underneath it. */
 .strip-move {
   position: absolute;
   inset: 0;
+  overflow: hidden;
   transform: translateY(101%);
   animation: printout 9s cubic-bezier(0.22, 1, 0.36, 1) 0.9s forwards;
 }
 
-.strip {
+/* two copies of the strip stacked, so scrolling by half its height loops with no jump */
+.strip-track {
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
   width: 100%;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+  animation: reel 20s linear infinite;
 }
+
+.strip {
+  display: block;
+  width: 100%;
+}
+
+@keyframes reel { to { transform: translateY(-50%); } }
 
 @keyframes printout { to { transform: translateY(0); } }
 
@@ -810,6 +820,7 @@ footer { padding: 56px 26px 64px; text-align: center; }
 
 @media (prefers-reduced-motion: reduce) {
   .strip-move { animation: none; transform: translateY(0); }
+  .strip-track { animation: none; }
 }
 
 .ev-cal {
