@@ -840,3 +840,18 @@ footer { padding: 56px 26px 64px; text-align: center; }
   8% { opacity: 1; }
   100% { transform: translateY(102vh) translateX(var(--drift, 0px)) rotate(540deg); opacity: 0; }
 }
+
+.strip-quote {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  font-family: 'Caveat', cursive;
+  font-size: 13px;
+  line-height: 1.1;
+  text-align: center;
+  color: #4a3a33;
+  background: #fbf7ee;
+  padding: 6px 4px 4px;
+}
