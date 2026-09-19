@@ -123,14 +123,20 @@ body {
   z-index: 1;
 }
 
+/* the caption and the photo strip share this wrapper, so they slide out of the camera together */
+.strip-move {
+  position: absolute;
+  inset: 0;
+  transform: translateY(101%);
+  animation: printout 9s cubic-bezier(0.22, 1, 0.36, 1) 0.9s forwards;
+}
+
 .strip {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   box-shadow: 0 4px 14px rgba(0,0,0,0.35);
-  transform: translateY(101%);
-  animation: printout 3.4s cubic-bezier(0.22, 1, 0.36, 1) 0.9s forwards;
 }
 
 @keyframes printout { to { transform: translateY(0); } }
@@ -803,7 +809,7 @@ footer { padding: 56px 26px 64px; text-align: center; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .strip { animation: none; transform: translateY(0); }
+  .strip-move { animation: none; transform: translateY(0); }
 }
 
 .ev-cal {
