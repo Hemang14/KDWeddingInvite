@@ -104,7 +104,7 @@ body {
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
-  width: 196px;
+  width: 130px;
   display: block;
   filter: drop-shadow(0 12px 22px rgba(0,0,0,0.45));
 }
@@ -113,8 +113,8 @@ body {
   position: absolute;
   bottom: 70px;
   left: 50%;
-  width: 86px;
-  height: 19vh;
+  width: 73px;
+  height: 22vh;
   min-height: 128px;
   max-height: 190px;
   margin-left: -43px;
