@@ -505,7 +505,8 @@ section { padding: 64px 26px; text-align: center; }
   overflow: hidden;
 }
 
-.event img { width: 100%; display: block; }
+.event img,
+.event video { width: 100%; display: block; aspect-ratio: 1 / 1; object-fit: cover; }
 
 .event-info { padding: 22px 18px 24px; }
 
