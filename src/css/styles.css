@@ -44,18 +44,19 @@ body {
   position: relative;
   z-index: 3;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 2.5vh;
   width: 100%;
   max-width: 430px;
-  padding: 0 16px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 8vh 24px 6vh;
   animation: fadeUp 1.2s ease-out both;
 }
 
-.env-inner {
-  flex: 1 1 0;
-  min-width: 0;
+.env-top {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,20 +64,20 @@ body {
 }
 
 .env-kicker {
-  color: var(--gold-soft);
-  font-size: clamp(8px, 2.3vw, 10px);
-  letter-spacing: 0.22em;
+  color: #f1dda8;
+  font-size: clamp(11px, 3.2vw, 13px);
+  letter-spacing: 0.36em;
   text-transform: uppercase;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .env-names {
   color: var(--cream);
   font-family: 'Great Vibes', cursive;
-  font-size: clamp(34px, 11vw, 46px);
+  font-size: clamp(40px, 13vw, 54px);
   letter-spacing: 0.01em;
-  line-height: 1.12;
-  margin-bottom: 32px;
+  line-height: 1.08;
+  text-align: center;
 }
 
 .env-names span {
@@ -84,36 +85,39 @@ body {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   color: var(--gold);
-  font-size: 0.42em;
-  letter-spacing: 0.1em;
-  line-height: 1.6;
+  font-size: 0.56em;
+  letter-spacing: 0.16em;
+  line-height: 1.7;
 }
 
 .print {
   position: relative;
-  flex: 0 0 42%;
-  align-self: stretch;
+  width: 210px;
+  height: 30vh;
+  min-height: 210px;
   pointer-events: none;
 }
 
 .cam {
   position: absolute;
-  bottom: -11vh;
-  left: 75%;
-  transform: translateX(-40%);
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 2;
-  width: 164%;
+  width: 196px;
   display: block;
-  filter: drop-shadow(0 10px 18px rgba(0,0,0,0.4));
+  filter: drop-shadow(0 12px 22px rgba(0,0,0,0.45));
 }
 
 .strip-slot {
   position: absolute;
-  bottom: 8vh;
-  left: 67%;
-  width: 62%;
-  height: 42vh;
-  margin-left: -44%;
+  bottom: 70px;
+  left: 50%;
+  width: 86px;
+  height: 19vh;
+  min-height: 128px;
+  max-height: 190px;
+  margin-left: -43px;
   overflow: hidden;
   transform: rotate(-3deg);
   z-index: 1;
