@@ -545,7 +545,15 @@ section { position: relative; }
 }
 
 .event img,
-.event video { width: 100%; display: block; aspect-ratio: 1 / 1; object-fit: cover; }
+.event video {
+  width: 100%;
+  display: block;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  /* nudge the footage up: zoom from the bottom edge so the cut-off title strip at the top is cropped out */
+  transform: scale(1.12);
+  transform-origin: 50% 100%;
+}
 
 .event-info { padding: 22px 18px 24px; }
 
