@@ -110,9 +110,90 @@ form.addEventListener('submit', () => {
   tyMsg.textContent = saidYes
     ? "From the bottom of our hearts, thank you for being part of our special day. Your love and warm wishes mean more than words can say. We can't wait to see you!"
     : "We'll miss having you with us, but we're so grateful for your love and blessings. You'll be in our hearts on our special day.";
-  setTimeout(() => thankyou.classList.add('show'), 400);
+  setTimeout(() => { thankyou.classList.add('show'); petalBurst(); }, 400);
 });
 
 document.getElementById('ty-close').addEventListener('click', () => {
   thankyou.classList.remove('show');
+});
+
+function petalBurst() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let layer = thankyou.querySelector('.ty-burst');
+  if (!layer) {
+    layer = document.createElement('div');
+    layer.className = 'ty-burst';
+    thankyou.insertBefore(layer, thankyou.firstChild);
+  }
+  layer.innerHTML = '';
+  for (let i = 0; i < 40; i++) {
+    const p = document.createElement('span');
+    p.className = 'petal';
+    const size = 6 + Math.random() * 9;
+    p.style.left = Math.random() * 100 + '%';
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    p.style.setProperty('--drift', (Math.random() * 120 - 60) + 'px');
+    p.style.animationDuration = (2.6 + Math.random() * 2.6) + 's';
+    p.style.animationDelay = Math.random() * 0.8 + 's';
+    p.style.opacity = 0.5 + Math.random() * 0.5;
+    layer.appendChild(p);
+  }
+}
+
+const CAL = {
+  haldi: ['Haldi — Dishakkshi & Kartikay', '20261211T043000Z', '20261211T070000Z'],
+  sangeet: ['Sangeet — Dishakkshi & Kartikay', '20261211T133000Z', '20261211T173000Z'],
+  wedding: ['Wedding — Dishakkshi & Kartikay', '20261212T053000Z', '20261212T083000Z'],
+  reception: ['Reception — Dishakkshi & Kartikay', '20261212T133000Z', '20261212T173000Z']
+};
+
+function pad(n) { return String(n).padStart(2, '0'); }
+
+function icsEvent(uid, title, start, end, allday) {
+  const dt = allday
+    ? `DTSTART;VALUE=DATE:${start}\r\nDTEND;VALUE=DATE:${end}`
+    : `DTSTART:${start}\r\nDTEND:${end}`;
+  return [
+    'BEGIN:VEVENT',
+    `UID:${uid}@kdwedding`,
+    dt,
+    `SUMMARY:${title}`,
+    'LOCATION:IIDM Resort',
+    'END:VEVENT'
+  ].join('\r\n');
+}
+
+function downloadICS(filename, events) {
+  const ics = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//KD Wedding//EN',
+    'CALSCALE:GREGORIAN',
+    ...events,
+    'END:VCALENDAR'
+  ].join('\r\n');
+  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+document.querySelectorAll('.ev-cal').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const key = btn.dataset.cal;
+    if (key === 'all') {
+      const events = Object.entries(CAL).map(([k, v]) =>
+        icsEvent(k, v[0], v[1], v[2], false));
+      downloadICS('KD-Wedding.ics', events);
+    } else {
+      const v = CAL[key];
+      downloadICS(key + '.ics', [icsEvent(key, v[0], v[1], v[2], false)]);
+    }
+  });
 });

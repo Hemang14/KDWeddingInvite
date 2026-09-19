@@ -798,3 +798,45 @@ footer { padding: 56px 26px 64px; text-align: center; }
 @media (prefers-reduced-motion: reduce) {
   .strip { animation: none; transform: translateY(0); }
 }
+
+.ev-cal {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--wine);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(201,163,92,0.7);
+  padding: 2px 0;
+}
+
+.ty-cal {
+  display: block;
+  margin: 28px auto 0;
+  color: var(--gold-soft);
+  border-bottom-color: rgba(230,207,150,0.7);
+  letter-spacing: 0.16em;
+}
+
+.ty-burst {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ty-burst .petal {
+  top: -30px;
+  animation: burst-fall cubic-bezier(0.3, 0.6, 0.5, 1) forwards;
+}
+
+@keyframes burst-fall {
+  0% { transform: translateY(-30px) translateX(0) rotate(0deg); opacity: 0; }
+  8% { opacity: 1; }
+  100% { transform: translateY(102vh) translateX(var(--drift, 0px)) rotate(540deg); opacity: 0; }
+}
