@@ -130,7 +130,7 @@ body {
   inset: 0;
   overflow: hidden;
   transform: translateY(101%);
-  animation: printout 9s cubic-bezier(0.22, 1, 0.36, 1) 0.9s forwards;
+  animation: printout 3s cubic-bezier(0.22, 1, 0.36, 1) 0.9s forwards;
 }
 
 /* two copies of the strip stacked, so scrolling by half its height loops with no jump */
@@ -139,7 +139,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  animation: reel 20s linear infinite;
+  animation: reel 10s linear infinite;
 }
 
 .strip {
