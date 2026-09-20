@@ -26,17 +26,23 @@ if (location.hash === '#open') {
   musicBtn.hidden = false;
 }
 
-seal.addEventListener('click', () => {
+let musicWanted = false;
+let opened = false;
+
+function openInvite() {
+  if (opened) return;
+  opened = true;
+  musicWanted = true;
   envelope.classList.add('open');
   card.setAttribute('aria-hidden', 'false');
   musicBtn.hidden = false;
   audio.play().catch(() => {});
   setTimeout(() => envelope.remove(), 1200);
-});
+}
 
-let musicWanted = false;
-
-seal.addEventListener('click', () => { musicWanted = true; });
+// the seal and the "Tap to open" text both open the invitation
+seal.addEventListener('click', openInvite);
+document.getElementById('env-hint').addEventListener('click', openInvite);
 
 musicBtn.addEventListener('click', () => {
   if (audio.paused) {

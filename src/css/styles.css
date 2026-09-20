@@ -185,11 +185,19 @@ body {
 
 .env-hint {
   margin-top: -10px;
+  padding: 10px 22px;            /* bigger tap area for thumbs */
+  background: none;
+  border: none;
+  font-family: inherit;
   color: var(--gold-soft);
   font-style: italic;
   font-size: 16px;
   opacity: 0.85;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
+
+.env-hint:active { opacity: 1; }
 
 @keyframes pulse {
   0%, 100% { box-shadow: 0 6px 24px rgba(0,0,0,0.5), 0 0 0 6px rgba(201,163,92,0.18); }
