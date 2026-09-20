@@ -600,7 +600,13 @@ section { position: relative; }
 
 .marquee {
   margin: 8px -26px 0;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
   -webkit-mask: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
   mask: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
 }
@@ -610,10 +616,11 @@ section { position: relative; }
   width: max-content;
   gap: 20px;
   padding: 14px 10px 20px;
-  animation: marquee 34s linear infinite;
 }
 
-@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee::-webkit-scrollbar { display: none; }
+.marquee.dragging { cursor: grabbing; }
+.marquee img { -webkit-user-drag: none; pointer-events: none; }
 
 .polaroid {
   flex: 0 0 auto;
@@ -814,7 +821,6 @@ footer { padding: 56px 26px 64px; text-align: center; }
   .reveal { opacity: 1; transform: none; transition: none; }
   #seal { animation: none; }
   .env-inner { animation: none; }
-  .marquee-track { animation: none; }
   .name, .env-names { animation: none; }
 }
 

@@ -197,3 +197,85 @@ document.querySelectorAll('.ev-cal').forEach(btn => {
     }
   });
 });
+
+/* ---- Photo carousel: endless auto-scroll that the guest can also swipe / drag ---- */
+(function () {
+  const marquee = document.querySelector('.marquee');
+  const track = marquee && marquee.querySelector('.marquee-track');
+  if (!track) return;
+
+  // three copies of the set: we keep the view in the middle copy and jump by one set width to loop
+  const originals = Array.from(track.children);
+  for (let i = 0; i < 2; i++) {
+    originals.forEach(el => {
+      const clone = el.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      clone.querySelectorAll('img').forEach(img => img.setAttribute('alt', ''));
+      track.appendChild(clone);
+    });
+  }
+
+  const SPEED = 33;        // px per second (same pace as before)
+  const RESUME_AFTER = 2200; // ms of no touching before auto-scroll resumes
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let setW = 0, pos = 0, lastSet = 0, lastUser = 0, last = 0, visible = true, dragging = false;
+
+  function measure() {
+    const first = originals[0];
+    const nextSet = track.children[originals.length];
+    setW = nextSet.offsetLeft - first.offsetLeft;
+    marquee.scrollLeft = pos = lastSet = setW;
+  }
+
+  function wrap() {
+    const x = marquee.scrollLeft;
+    if (x < setW * 0.5) { marquee.scrollLeft = pos = lastSet = x + setW; }
+    else if (x > setW * 1.5) { marquee.scrollLeft = pos = lastSet = x - setW; }
+  }
+
+  marquee.addEventListener('scroll', () => {
+    if (Math.abs(marquee.scrollLeft - lastSet) > 1.5) lastUser = performance.now(); // the guest moved it
+    wrap();
+  }, { passive: true });
+
+  ['touchstart', 'touchmove', 'wheel'].forEach(ev =>
+    marquee.addEventListener(ev, () => { lastUser = performance.now(); }, { passive: true }));
+
+  // mouse drag for desktop
+  let startX = 0, startLeft = 0;
+  marquee.addEventListener('pointerdown', e => {
+    if (e.pointerType !== 'mouse') return;
+    dragging = true; startX = e.clientX; startLeft = marquee.scrollLeft;
+    marquee.classList.add('dragging'); marquee.setPointerCapture(e.pointerId);
+  });
+  marquee.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    marquee.scrollLeft = startLeft - (e.clientX - startX);
+    lastUser = performance.now();
+  });
+  const endDrag = () => { dragging = false; marquee.classList.remove('dragging'); lastUser = performance.now(); };
+  marquee.addEventListener('pointerup', endDrag);
+  marquee.addEventListener('pointercancel', endDrag);
+
+  new IntersectionObserver(entries => { visible = entries[0].isIntersecting; }).observe(marquee);
+
+  function tick(now) {
+    const dt = Math.min((now - last) / 1000, 0.1); last = now;
+    if (visible && !reduceMotion) {
+      if (dragging || now - lastUser < RESUME_AFTER) {
+        pos = marquee.scrollLeft;
+      } else {
+        pos += SPEED * dt;
+        marquee.scrollLeft = pos;
+        lastSet = marquee.scrollLeft;
+        wrap();
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const start = () => { measure(); requestAnimationFrame(t => { last = t; tick(t); }); };
+  if (document.readyState === 'complete') start(); else window.addEventListener('load', start);
+  window.addEventListener('resize', () => { const frac = (marquee.scrollLeft - setW) / (setW || 1); measure(); marquee.scrollLeft = pos = lastSet = setW + frac * setW; });
+})();
