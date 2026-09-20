@@ -216,10 +216,11 @@ document.querySelectorAll('.ev-cal').forEach(btn => {
   }
 
   const SPEED = 33;        // px per second (same pace as before)
-  const RESUME_AFTER = 2200; // ms of no touching before auto-scroll resumes
+  const RESUME_AFTER = 120;  // ms after the last swipe/momentum before the drift picks up again
+  const RAMP = 0.6;          // seconds to ease back up to full speed, so it feels like a continuation
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  let setW = 0, pos = 0, lastSet = 0, lastUser = 0, last = 0, visible = true, dragging = false;
+  let setW = 0, pos = 0, lastSet = 0, lastUser = 0, last = 0, visible = true, dragging = false, touching = false, ramp = 1;
 
   function measure() {
     const first = originals[0];
@@ -239,8 +240,11 @@ document.querySelectorAll('.ev-cal').forEach(btn => {
     wrap();
   }, { passive: true });
 
-  ['touchstart', 'touchmove', 'wheel'].forEach(ev =>
+  ['touchmove', 'wheel'].forEach(ev =>
     marquee.addEventListener(ev, () => { lastUser = performance.now(); }, { passive: true }));
+  marquee.addEventListener('touchstart', () => { touching = true; lastUser = performance.now(); }, { passive: true });
+  ['touchend', 'touchcancel'].forEach(ev =>
+    marquee.addEventListener(ev, () => { touching = false; lastUser = performance.now(); }, { passive: true }));
 
   // mouse drag for desktop
   let startX = 0, startLeft = 0;
@@ -263,10 +267,12 @@ document.querySelectorAll('.ev-cal').forEach(btn => {
   function tick(now) {
     const dt = Math.min((now - last) / 1000, 0.1); last = now;
     if (visible && !reduceMotion) {
-      if (dragging || now - lastUser < RESUME_AFTER) {
+      if (dragging || touching || now - lastUser < RESUME_AFTER) {
         pos = marquee.scrollLeft;
+        ramp = 0;
       } else {
-        pos += SPEED * dt;
+        ramp = Math.min(1, ramp + dt / RAMP);
+        pos += SPEED * ramp * ramp * (3 - 2 * ramp) * dt;
         marquee.scrollLeft = pos;
         lastSet = marquee.scrollLeft;
         wrap();
