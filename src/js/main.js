@@ -216,7 +216,7 @@ document.querySelectorAll('.ev-cal').forEach(btn => {
   }
 
   const SPEED = 33;        // px per second (same pace as before)
-  const RESUME_AFTER = 120;  // ms after the last swipe/momentum before the drift picks up again
+  const RESUME_AFTER = 5;  // ms after the last swipe/momentum before the drift picks up again
   const RAMP = 0.6;          // seconds to ease back up to full speed, so it feels like a continuation
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 

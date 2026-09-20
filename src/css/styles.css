@@ -184,7 +184,7 @@ body {
 }
 
 .env-hint {
-  margin-top: 26px;
+  margin-top: -10px;
   color: var(--gold-soft);
   font-style: italic;
   font-size: 16px;
