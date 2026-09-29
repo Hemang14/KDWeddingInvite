@@ -190,15 +190,40 @@ function downloadICS(filename, events) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
+// iOS hands a downloaded .ics straight to Apple Calendar, so keep that path there.
+// Chrome on Android just drops .ics files into Downloads with no auto-import, so for a single
+// event we send Android guests straight to Google Calendar's own "add event" link instead —
+// no download, no extra tap to find the file afterwards.
+const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent);
+const isAndroid = /Android/.test(navigator.userAgent);
+
+function googleCalUrl(title, start, end) {
+  const params = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: title,
+    dates: `${start}/${end}`,
+    location: 'IIDM Resort'
+  });
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
+
 document.querySelectorAll('.ev-cal').forEach(btn => {
   btn.addEventListener('click', () => {
     const key = btn.dataset.cal;
+
+    // "Add all our dates" bundles four events in one file — Google's link only takes one event,
+    // so this one always uses the .ics download on every platform.
     if (key === 'all') {
       const events = Object.entries(CAL).map(([k, v]) =>
         icsEvent(k, v[0], v[1], v[2], false));
       downloadICS('KD-Wedding.ics', events);
+      return;
+    }
+
+    const v = CAL[key];
+    if (isAndroid && !isIOS) {
+      window.open(googleCalUrl(v[0], v[1], v[2]), '_blank', 'noopener');
     } else {
-      const v = CAL[key];
       downloadICS(key + '.ics', [icsEvent(key, v[0], v[1], v[2], false)]);
     }
   });
