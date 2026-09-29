@@ -569,7 +569,10 @@ section { position: relative; }
   display: block;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-  /* nudge the footage up: zoom from the bottom edge so the cut-off title strip at the top is cropped out */
+}
+
+/* only the video cards need the extra zoom, to crop the title lettering baked into the top of the footage */
+.event video {
   transform: scale(1.12);
   transform-origin: 50% 100%;
 }
