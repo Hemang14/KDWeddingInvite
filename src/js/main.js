@@ -165,7 +165,7 @@ function icsEvent(uid, title, start, end, allday) {
     `UID:${uid}@kdwedding`,
     dt,
     `SUMMARY:${title}`,
-    'LOCATION:IIDM Resort',
+    'LOCATION:IIDM Resort\, Lucknow',
     'END:VEVENT'
   ].join('\r\n');
 }
@@ -202,7 +202,7 @@ function googleCalUrl(title, start, end) {
     action: 'TEMPLATE',
     text: title,
     dates: `${start}/${end}`,
-    location: 'IIDM Resort'
+    location: 'IIDM Resort, Lucknow'
   });
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
